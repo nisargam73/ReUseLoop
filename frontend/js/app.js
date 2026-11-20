@@ -3,7 +3,7 @@
 // ReUseLoop - Search, Filter, Display, Delete
 // =======================================
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://reuseloop.onrender.com";
 
 const container = document.getElementById("items-container");
 const searchForm = document.getElementById("search-form");
