@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from sqlalchemy import URL, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# Load the project-level .env file (if present).
+# Load local environment variables.
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(PROJECT_DIR / ".env")
 
@@ -17,7 +17,7 @@ DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = int(os.getenv("DB_PORT", "3306"))
 DB_NAME = os.getenv("DB_NAME", "reuseloop_db")
 
-# URL.create safely handles special characters in database passwords.
+# Build database URL.
 DATABASE_URL = URL.create(
     drivername="mysql+pymysql",
     username=DB_USER,
@@ -27,10 +27,22 @@ DATABASE_URL = URL.create(
     database=DB_NAME,
 )
 
+# Configure TLS for TiDB Cloud.
+connect_args = {}
+
+DB_SSL_CA = os.getenv("DB_SSL_CA")
+
+if DB_SSL_CA:
+    connect_args["ssl"] = {
+        "ca": DB_SSL_CA
+    }
+
+# Create SQLAlchemy engine.
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,
     pool_recycle=1800,
+    connect_args=connect_args,
 )
 
 SessionLocal = sessionmaker(
