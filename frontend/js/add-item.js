@@ -2,7 +2,7 @@
 // ReUseLoop - Add Item and Photo Upload
 // =======================================
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://reuseloop.onrender.com";
 
 const form = document.getElementById("add-item-form");
 const photoInput = document.getElementById("photo");
