@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>List an Item | ReUseLoop</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <h1>ReUseLoop</h1>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="browse.html">Browse Items</a>
+        <a href="../add-item.html">List an Item</a>
+    </nav>
+</header>
+
+<main class="add-item-page">
+
+    <h2>Give Your Item a Second Life ♻️</h2>
+
+    <p>List an item for sale, exchange, or donation.</p>
+
+    <form id="add-item-form" class="add-item-form">
+
+        <label for="title">Item Name</label>
+        <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="e.g. Used Laptop"
+            required
+        >
+
+        <label for="description">Description</label>
+        <textarea
+            id="description"
+            name="description"
+            placeholder="Describe your item"
+            required
+        ></textarea>
+
+        <label for="category_id">Category</label>
+        <select id="category_id" name="category_id" required>
+            <option value="">Select a category</option>
+            <option value="1">Electronics</option>
+            <option value="2">Books</option>
+            <option value="3">Clothing</option>
+            <option value="4">Furniture</option>
+            <option value="5">Home Appliances</option>
+            <option value="6">Sports</option>
+            <option value="7">Other</option>
+        </select>
+
+        <label for="item_condition">Condition</label>
+        <select id="item_condition" name="item_condition" required>
+            <option value="">Select condition</option>
+            <option value="New">New</option>
+            <option value="Like New">Like New</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+        </select>
+
+        <label for="listing_type">Listing Type</label>
+        <select id="listing_type" name="listing_type" required>
+            <option value="">Select listing type</option>
+            <option value="Sale">Sale</option>
+            <option value="Exchange">Exchange</option>
+            <option value="Donation">Donation</option>
+        </select>
+
+        <label for="price">Price (₹)</label>
+        <input
+            type="number"
+            id="price"
+            name="price"
+            min="0"
+            step="0.01"
+            placeholder="Enter price for sale"
+        >
+
+        <label for="city">City</label>
+        <input
+            type="text"
+            id="city"
+            name="city"
+            placeholder="e.g. Mysuru"
+            required
+        >
+
+        <label for="photo">Item Photo</label>
+
+        <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/jpeg,image/png,image/webp"
+        >
+
+        <div class="photo-preview-box">
+            <img
+                id="photo-preview"
+                alt="Selected item photo preview"
+                hidden
+            >
+
+            <p id="photo-placeholder">
+                Your selected photo will appear here.
+            </p>
+        </div>
+
+        <button type="submit" id="submit-item">
+            Publish Item
+        </button>
+
+        <p id="form-message" role="status"></p>
+
+    </form>
+
+</main>
+
+<script src="../js/add-item.js"></script>
+
+</body>
+</html>

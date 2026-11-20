@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donations | ReUseLoop</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+```
+<style>
+    .donations-page {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .donations-hero {
+        padding: 40px 20px;
+        text-align: center;
+        background: #e8f5ec;
+        border-radius: 18px;
+        margin-bottom: 35px;
+    }
+
+    .donations-hero h1 {
+        color: #176b45;
+        font-size: 34px;
+    }
+
+    .donations-hero p {
+        color: #53665a;
+        line-height: 1.7;
+    }
+
+    .donations-search {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        max-width: 650px;
+        margin: 25px auto 0;
+    }
+
+    .donations-search input {
+        flex: 1;
+        min-width: 0;
+        padding: 13px;
+        border: 1px solid #cbd9ce;
+        border-radius: 8px;
+    }
+
+    .donations-search button,
+    .donation-button {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 8px;
+        background: #176b45;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .donations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+    }
+
+    .donation-card {
+        padding: 20px;
+        background: white;
+        border: 1px solid #e1e7e2;
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .donation-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        background: #f3f5f3;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .donation-card h3 {
+        color: #176b45;
+    }
+
+    .donation-card p {
+        line-height: 1.6;
+        color: #555;
+        overflow-wrap: anywhere;
+    }
+
+    .donation-label {
+        display: inline-block;
+        align-self: flex-start;
+        padding: 6px 12px;
+        margin-bottom: 10px;
+        background: #e4f5e9;
+        color: #176b45;
+        border-radius: 20px;
+        font-size: 13px;
+    }
+
+    .donation-card .donation-button {
+        margin-top: auto;
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        .donations-search {
+            flex-direction: column;
+        }
+
+        .donations-hero h1 {
+            font-size: 27px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<header class="site-header">
+    <h2>♻️ ReUseLoop</h2>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="browse.html">Browse Items</a>
+        <a href="../add-item.html">List an Item</a>
+        <a href="exchange.html">Exchange</a>
+        <a href="donations.html">Donations</a>
+        <a href="repairs.html">Repairs</a>
+        <a href="impact.html">Impact</a>
+    </nav>
+</header>
+
+<main class="donations-page">
+
+```
+<section class="donations-hero">
+    <h1>🎁 Give More, Waste Less</h1>
+    <p>
+        Discover useful items shared by generous members of your
+        community. Every donation gives an item a second life.
+    </p>
+
+    <form id="donations-search-form" class="donations-search">
+        <input
+            type="search"
+            id="donations-search-input"
+            placeholder="Search donated items..."
+            aria-label="Search donations"
+        >
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<section>
+    <h2>Available Donations</h2>
+
+    <p id="donations-message" role="status">
+        Loading donations...
+    </p>
+
+    <div id="donations-container" class="donations-grid"></div>
+</section>
+
+<section style="margin-top: 45px; text-align: center;">
+    <h2>Have Something to Donate?</h2>
+    <p>Share something useful with someone who needs it.</p>
+    <a href="../add-item.html" class="donation-button">
+        Donate an Item
+    </a>
+</section>
+```
+
+</main>
+
+<script src="../js/donations.js"></script>
+
+</body>
+</html>

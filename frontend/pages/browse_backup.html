@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Items | ReUseLoop</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .browse-page {
+            max-width: 1250px;
+            margin: 35px auto;
+            padding: 0 22px;
+        }
+
+        .browse-hero {
+            padding: 38px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #e4f5e8, #f5fbf5);
+            margin-bottom: 28px;
+        }
+
+        .browse-hero h1 {
+            color: #176b45;
+            font-size: clamp(28px, 4vw, 42px);
+            margin-bottom: 10px;
+        }
+
+        .browse-hero p {
+            color: #52665a;
+            line-height: 1.7;
+        }
+
+        .browse-tools {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .browse-tools input,
+        .browse-tools select,
+        .browse-tools button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d6e4d9;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .browse-tools button {
+            background: #176b45;
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .browse-tools button:hover {
+            background: #105335;
+        }
+
+        .browse-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .browse-summary h2 {
+            color: #234333;
+        }
+
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .browse-card {
+            padding: 22px;
+            border: 1px solid #e0eae2;
+            border-radius: 17px;
+            background: white;
+            box-shadow: 0 5px 18px rgba(24, 65, 40, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .browse-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(24, 65, 40, 0.12);
+        }
+
+        .browse-item-image {
+            display: block;
+            width: 100%;
+            height: 190px;
+            object-fit: contain;
+            background: #f5f8f5;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .browse-card h3 {
+            color: #176b45;
+            margin: 14px 0 10px;
+        }
+
+        .browse-card p {
+            color: #5c6b61;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .item-tag {
+            display: inline-block;
+            padding: 6px 10px;
+            margin: 4px 4px 4px 0;
+            border-radius: 20px;
+            background: #e8f5ec;
+            color: #176b45;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .item-price {
+            margin: 15px 0;
+            font-size: 20px;
+            font-weight: 800;
+            color: #234333;
+        }
+
+        .view-item-button {
+            display: block;
+            margin-top: 16px;
+            padding: 11px;
+            text-align: center;
+            border-radius: 9px;
+            background: #176b45;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .view-item-button:hover {
+            background: #105335;
+        }
+
+        .browse-message {
+            padding: 22px;
+            color: #52665a;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 900px) {
+            .item-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .browse-tools {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .item-grid,
+            .browse-tools {
+                grid-template-columns: 1fr;
+            }
+
+            .browse-hero {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="site-header"></header>
+
+    <main class="browse-page">
+
+        <section class="browse-hero">
+            <h1>Discover Something Useful ♻️</h1>
+
+            <p>
+                Give pre-loved items a second life. Browse affordable products,
+                discover exchange opportunities, and find items available
+                for donation in your city.
+            </p>
+        </section>
+
+        <section class="browse-tools">
+
+            <input
+                type="search"
+                id="browse-search"
+                placeholder="Search items or city..."
+                aria-label="Search items or city"
+            >
+
+            <select id="browse-category" aria-label="Filter by category">
+                <option value="">All Categories</option>
+                <option value="1">Electronics</option>
+                <option value="2">Books</option>
+                <option value="3">Clothing</option>
+                <option value="4">Furniture</option>
+                <option value="5">Home Appliances</option>
+                <option value="6">Sports</option>
+                <option value="7">Other</option>
+            </select>
+
+            <select id="browse-type" aria-label="Filter by listing type">
+                <option value="">All Listing Types</option>
+                <option value="Sale">For Sale</option>
+                <option value="Exchange">Exchange</option>
+                <option value="Donation">Donation</option>
+            </select>
+
+            <select id="browse-sort" aria-label="Sort items">
+                <option value="default">Recently Added</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="title">Name: A to Z</option>
+            </select>
+
+            <button type="button" id="browse-reset">
+                Clear Filters
+            </button>
+
+        </section>
+
+        <section>
+            <div class="browse-summary">
+                <h2>Available Items</h2>
+                <span id="browse-count">Loading...</span>
+            </div>
+
+            <div id="browse-items" class="item-grid">
+                <p class="browse-message">Loading items from ReUseLoop...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/navigation.js"></script>
+    <script src="../js/browse.js"></script>
+
+</body>
+</html>

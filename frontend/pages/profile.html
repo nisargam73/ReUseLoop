@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | ReUseLoop</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .profile-page {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .profile-hero {
+            padding: 35px;
+            border-radius: 20px;
+            color: white;
+            background: linear-gradient(135deg, #14532d, #22c55e);
+            margin-bottom: 25px;
+        }
+
+        .profile-hero h1 {
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 300px minmax(0, 1fr);
+            gap: 25px;
+            align-items: start;
+        }
+
+        .profile-card,
+        .profile-form-card,
+        .activity-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+            margin-bottom: 22px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 45px;
+            margin: 0 auto 18px;
+        }
+
+        .profile-summary {
+            text-align: center;
+        }
+
+        .profile-summary h2 {
+            margin-bottom: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-summary p {
+            color: #64748b;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-badge {
+            display: inline-block;
+            padding: 7px 12px;
+            margin-top: 12px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 13px;
+        }
+
+        .profile-links {
+            display: grid;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .profile-links a {
+            display: block;
+            padding: 12px;
+            border-radius: 9px;
+            text-decoration: none;
+            color: #166534;
+            background: #f0fdf4;
+        }
+
+        .profile-links a:hover {
+            background: #dcfce7;
+        }
+
+        .profile-form-card h2,
+        .activity-card h2 {
+            margin-bottom: 20px;
+            color: #166534;
+        }
+
+        .profile-form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .profile-field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .profile-field label {
+            font-weight: 600;
+        }
+
+        .profile-field input,
+        .profile-field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font: inherit;
+        }
+
+        .profile-field input:focus,
+        .profile-field textarea:focus {
+            outline: 2px solid #86efac;
+            border-color: #16a34a;
+        }
+
+        .profile-button {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            background: #15803d;
+            color: white;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .profile-button:hover {
+            background: #166534;
+        }
+
+        .profile-button.secondary {
+            background: #475569;
+        }
+
+        .profile-button.danger {
+            background: #b91c1c;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .profile-stat {
+            padding: 18px 10px;
+            text-align: center;
+            border-radius: 12px;
+            background: #f0fdf4;
+        }
+
+        .profile-stat strong {
+            display: block;
+            font-size: 25px;
+            color: #15803d;
+        }
+
+        .profile-stat span {
+            display: block;
+            margin-top: 5px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .profile-message {
+            min-height: 22px;
+            margin-top: 12px;
+        }
+
+        .profile-note {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .activity-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        @media (max-width: 750px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-hero {
+                padding: 25px;
+            }
+
+            .profile-hero h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="browse.html">Browse Items</a>
+        <a href="add-item.html">List an Item</a>
+        <a href="exchange.html">Exchange</a>
+        <a href="donations.html">Donations</a>
+        <a href="repairs.html">Repairs</a>
+        <a href="messages.html">Messages</a>
+        <a href="impact.html">Impact</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+</header>
+
+<main class="profile-page">
+
+    <section class="profile-hero">
+        <h1>👤 My Profile</h1>
+        <p>Manage your details and explore your ReUseLoop activity.</p>
+    </section>
+
+    <div class="profile-layout">
+
+        <aside>
+            <section class="profile-card">
+                <div class="profile-summary">
+                    <div class="profile-avatar">👤</div>
+                    <h2 id="summary-name">Your Name</h2>
+                    <p id="summary-email">your.email@example.com</p>
+                    <p id="summary-city">Your city</p>
+                    <span class="profile-badge">♻️ ReUseLoop Member</span>
+                </div>
+
+                <div class="profile-links">
+                    <a href="browse.html">🔎 Browse Items</a>
+                    <a href="add-item.html">➕ List an Item</a>
+                    <a href="exchange.html">🔄 Exchange Items</a>
+                    <a href="donations.html">💚 Donations</a>
+                    <a href="messages.html">💬 Messages</a>
+                    <a href="impact.html">🌍 Impact Dashboard</a>
+                </div>
+            </section>
+        </aside>
+
+        <div>
+
+            <section class="profile-form-card">
+                <h2>Edit Your Details</h2>
+
+                <form id="profile-form" class="profile-form">
+
+                    <div class="profile-field">
+                        <label for="profile-name">Full Name</label>
+                        <input
+                            type="text"
+                            id="profile-name"
+                            maxlength="100"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+
+                    <div class="profile-field">
+                        <label for="profile-email">Email Address</label>
+                        <input
+                            type="email"
+                            id="profile-email"
+                            maxlength="254"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+                    <div class="profile-field">
+                        <label for="profile-city">City</label>
+                        <input
+                            type="text"
+                            id="profile-city"
+                            maxlength="100"
+                            placeholder="Enter your city"
+                        >
+                    </div>
+
+                    <div class="profile-field">
+                        <label for="profile-bio">About Me</label>
+                        <textarea
+                            id="profile-bio"
+                            rows="4"
+                            maxlength="500"
+                            placeholder="Tell the community about yourself..."
+                        ></textarea>
+                    </div>
+
+                    <button class="profile-button" type="submit">
+                        Save Profile
+                    </button>
+
+                    <p
+                        id="profile-message"
+                        class="profile-message"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                </form>
+
+                <p class="profile-note">
+                    Demonstration mode: profile information is saved in
+                    this browser only. It is not yet connected to a user
+                    account in MySQL.
+                </p>
+            </section>
+
+            <section class="activity-card">
+                <h2>My Activity</h2>
+
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <strong id="stat-listings">0</strong>
+                        <span>Available Listings</span>
+                    </div>
+
+                    <div class="profile-stat">
+                        <strong id="stat-donations">0</strong>
+                        <span>Donation Listings</span>
+                    </div>
+
+                    <div class="profile-stat">
+                        <strong id="stat-exchanges">0</strong>
+                        <span>Exchange Listings</span>
+                    </div>
+                </div>
+
+                <div class="activity-links">
+                    <a class="profile-button" href="browse.html">
+                        Browse Marketplace
+                    </a>
+
+                    <a class="profile-button secondary" href="add-item.html">
+                        Add New Listing
+                    </a>
+                </div>
+
+                <p id="activity-message" class="profile-message"></p>
+
+                <p class="profile-note">
+                    Until user login and ownership filtering are implemented,
+                    these counts show platform-wide available listings,
+                    not verified listings belonging to your account.
+                </p>
+            </section>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script src="../js/profile.js"></script>
+
+</body>
+</html>

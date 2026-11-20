@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Items | ReUseLoop</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f6faf7;
+        }
+
+        .browse-hero {
+            padding: 65px 20px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(120deg, #145c39, #24965c);
+        }
+
+        .browse-hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .browse-hero p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        .browse-search {
+            max-width: 650px;
+            margin: 28px auto 0;
+            display: flex;
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            padding: 6px;
+        }
+
+        .browse-search input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px 20px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .browse-search button {
+            border: none;
+            background: #f0a83c;
+            color: #173b28;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .browse-container {
+            max-width: 1250px;
+            margin: 40px auto;
+            padding: 0 22px;
+        }
+
+        .browse-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .browse-heading h2 {
+            color: #174e32;
+            font-size: 27px;
+        }
+
+        .browse-count {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .filter-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 22px;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dce5df;
+            border-radius: 8px;
+            outline: none;
+            background: white;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            border-color: #218838;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .clear-btn {
+            border: none;
+            background: transparent;
+            color: #218838;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .browse-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #e8eee9;
+            transition: 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.09);
+        }
+
+        .product-image {
+            height: 210px;
+            background: #e9f2eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.06);
+        }
+
+        .product-placeholder {
+            height: 100%;
+            display: grid;
+            place-items: center;
+            font-size: 65px;
+        }
+
+        .product-type {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 12px;
+            background: #ffffff;
+            color: #176b45;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .product-content {
+            padding: 18px;
+        }
+
+        .product-content h3 {
+            font-size: 18px;
+            color: #193e2b;
+            margin: 0 0 9px;
+        }
+
+        .product-description {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .product-price {
+            color: #218838;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-location {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .details-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            background: #218838;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .details-btn:hover {
+            background: #17652c;
+        }
+
+        .loading-state,
+        .empty-state,
+        .error-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 65px 20px;
+            background: white;
+            border-radius: 15px;
+            color: #64748b;
+        }
+
+        .loading-state {
+            font-size: 18px;
+        }
+
+        .empty-state h3 {
+            color: #174e32;
+            margin-bottom: 10px;
+        }
+
+        .retry-btn {
+            margin-top: 15px;
+            padding: 11px 22px;
+            border: none;
+            background: #218838;
+            color: white;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        @media(max-width: 1000px) {
+            .browse-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .filter-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 700px) {
+            .browse-hero h1 {
+                font-size: 30px;
+            }
+
+            .browse-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-image {
+                height: 155px;
+            }
+
+            .product-content {
+                padding: 12px;
+            }
+
+            .product-content h3 {
+                font-size: 15px;
+            }
+        }
+
+        @media(max-width: 430px) {
+            .browse-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .browse-search button {
+                padding: 10px 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header id="site-header"></header>
+
+<section class="browse-hero">
+
+    <h1>Discover Something Wonderful ♻️</h1>
+
+    <p>
+        Find pre-loved products, exchange useful items
+        and give everything a second life.
+    </p>
+
+    <div class="browse-search">
+
+        <input
+            type="search"
+            id="search-input"
+            placeholder="Search books, electronics, furniture..."
+        >
+
+        <button type="button" id="search-btn">
+            Search
+        </button>
+
+    </div>
+
+</section>
+
+<main class="browse-container">
+
+    <div class="browse-heading">
+
+        <h2>Explore Available Items</h2>
+
+        <span class="browse-count" id="browse-count">
+            Loading items...
+        </span>
+
+    </div>
+
+    <section class="filter-panel">
+
+        <div class="filter-group">
+
+            <label for="category-filter">Category</label>
+
+            <select id="category-filter">
+
+                <option value="">All Categories</option>
+                <option value="1">Electronics</option>
+                <option value="2">Books</option>
+                <option value="3">Clothing</option>
+                <option value="4">Furniture</option>
+                <option value="5">Home Appliances</option>
+                <option value="6">Sports</option>
+                <option value="7">Other</option>
+
+            </select>
+
+        </div>
+
+        <div class="filter-group">
+
+            <label for="type-filter">Listing Type</label>
+
+            <select id="type-filter">
+
+                <option value="">All Types</option>
+                <option value="Sale">Sale</option>
+                <option value="Exchange">Exchange</option>
+                <option value="Donation">Donation</option>
+
+            </select>
+
+        </div>
+
+        <div class="filter-group">
+
+            <label for="condition-filter">Condition</label>
+
+            <select id="condition-filter">
+
+                <option value="">All Conditions</option>
+                <option value="New">New</option>
+                <option value="Like New">Like New</option>
+                <option value="Good">Good</option>
+                <option value="Used">Used</option>
+
+            </select>
+
+        </div>
+
+        <div class="filter-group">
+
+            <label for="sort-filter">Sort By</label>
+
+            <select id="sort-filter">
+
+                <option value="newest">Newest First</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+    <div class="filter-actions">
+
+        <button class="clear-btn" id="clear-filters">
+            Clear All Filters ↺
+        </button>
+
+    </div>
+
+    <section class="browse-grid" id="browse-items">
+
+        <div class="loading-state">
+            Loading available products...
+        </div>
+
+    </section>
+
+</main>
+
+<script src="../js/navigation.js"></script>
+<script src="../js/browse.js"></script>
+
+</body>
+</html>

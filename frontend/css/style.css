@@ -1,0 +1,458 @@
+/* ReUseLoop Marketplace */
+
+.marketplace-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 24px;
+}
+
+.marketplace-section h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.marketplace-section > p {
+    color: #666;
+    margin-bottom: 28px;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.item-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.item-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.10);
+}
+
+.item-badge {
+    display: inline-block;
+    background: #e4f5e9;
+    color: #176b3a;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.item-card h3 {
+    margin: 16px 0 10px;
+    font-size: 21px;
+}
+
+.item-card p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.item-card .item-price {
+    color: #176b3a;
+    font-size: 21px;
+    font-weight: 700;
+    margin-top: 18px;
+}
+
+@media (max-width: 600px) {
+    .marketplace-section {
+        margin: 20px auto;
+        padding: 16px;
+    }
+
+    .marketplace-section h2 {
+        font-size: 26px;
+    }
+}
+
+/* Search bar */
+.search-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 750px;
+    margin: 25px auto;
+    flex-wrap: wrap;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 220px;
+    padding: 13px 16px;
+    border: 1px solid #cbd9ce;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-form input:focus {
+    border-color: #176b45;
+    box-shadow: 0 0 0 3px rgba(23, 107, 69, 0.12);
+}
+
+.search-form button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #176b45;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.search-form button:hover {
+    background: #105537;
+    transform: translateY(-2px);
+}
+
+#reset-search {
+    background: #64756a;
+}
+
+#search-message {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #176b45;
+}
+
+.item-status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #d9f3df;
+    color: #176b45;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-form input {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   ReUseLoop - Shared Navigation
+========================================== */
+
+#site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-bottom: 1px solid #e5eee7;
+}
+
+.main-navigation {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand-logo {
+    color: #176b45;
+    font-size: 24px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.navigation-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.navigation-links a {
+    color: #34483c;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 10px 12px;
+    border-radius: 10px;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.navigation-links a:hover {
+    background: #e8f5ec;
+    color: #176b45;
+    transform: translateY(-2px);
+}
+
+.navigation-links a.active {
+    background: #176b45;
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .main-navigation {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .navigation-links {
+        width: 100%;
+    }
+}
+
+/* FIX: ReUseLoop item photo sizing */
+
+.item-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.item-card img.item-photo {
+    display: block !important;
+    width: 100% !important;
+    height: 200px !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    box-sizing: border-box !important;
+    padding: 8px !important;
+    margin: 0 0 15px 0 !important;
+    background: #f3f5f3 !important;
+    border-radius: 12px !important;
+}
+
+/* =======================================
+   ReUseLoop - Item Details Page
+======================================= */
+
+.details-page {
+    width: min(1100px, 92%);
+    margin: 35px auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #176b45;
+    text-decoration: none;
+}
+
+.item-details-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.details-image-box {
+    width: 100%;
+    height: 420px;
+    padding: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #f3f5f3;
+    border-radius: 16px;
+    border: 1px solid #e1e7e2;
+}
+
+.details-image-box img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.details-information {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.details-information h2 {
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+.details-price {
+    color: #176b45;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.details-information p {
+    line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+    .item-details-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .details-image-box {
+        height: 300px;
+    }
+}
+
+/* ==========================================
+   ReUseLoop - Add Item Form
+========================================== */
+
+.add-item-page {
+    width: min(700px, 92%);
+    margin: 40px auto;
+}
+
+.add-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px;
+    background: white;
+    border: 1px solid #e1e7e2;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.add-item-form label {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.add-item-form input,
+.add-item-form select,
+.add-item-form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #cfd8d1;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.add-item-form textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.add-item-form button {
+    margin-top: 18px;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: #176b45;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-item-form button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.photo-preview-box {
+    width: 100%;
+    height: 280px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f5f3;
+    border: 1px dashed #a8b8ac;
+    border-radius: 12px;
+}
+
+.photo-preview-box img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+#photo-placeholder {
+    color: #66756a;
+    text-align: center;
+}
+
+#form-message {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .add-item-form {
+        padding: 18px;
+    }
+
+    .photo-preview-box {
+        height: 220px;
+    }
+}
+
+
+/* Item photo inside Browse Items cards */
+.item-card-image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+
+.delete-item-button {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 18px;
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.delete-item-button:hover {
+    background: #991b1b;
+}
+
+.item-card-image {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f3f5f3;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+

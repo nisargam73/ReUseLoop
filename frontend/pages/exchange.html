@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Item Exchange | ReUseLoop</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+    .exchange-page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px 20px;
+    }
+
+    .exchange-hero {
+        padding: 40px 25px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #e2f8e9, #f0f8ff);
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .exchange-hero h1 {
+        font-size: 34px;
+        color: #176b3a;
+        margin-bottom: 12px;
+    }
+
+    .exchange-hero p {
+        color: #4b6254;
+        line-height: 1.7;
+    }
+
+    .exchange-search {
+        display: flex;
+        gap: 12px;
+        max-width: 650px;
+        margin: 22px auto 0;
+    }
+
+    .exchange-search input,
+    .exchange-search select {
+        min-width: 0;
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #c9d9ce;
+        border-radius: 8px;
+        background: white;
+    }
+
+    .exchange-search button,
+    .exchange-button {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 8px;
+        background: #218838;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .exchange-search button:hover,
+    .exchange-button:hover {
+        background: #17692b;
+    }
+
+    .exchange-section-title {
+        margin: 30px 0 18px;
+    }
+
+    .exchange-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 22px;
+    }
+
+    .exchange-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .exchange-card h3 {
+        margin: 0 0 10px;
+        color: #243b2d;
+    }
+
+    .exchange-card p {
+        color: #5b6470;
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+    }
+
+    .exchange-badge {
+        display: inline-block;
+        align-self: flex-start;
+        background: #e2f8e9;
+        color: #176b3a;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .exchange-card .exchange-button {
+        text-align: center;
+        margin-top: auto;
+    }
+
+    #exchange-message {
+        margin: 20px 0;
+    }
+
+    @media (max-width: 600px) {
+        .exchange-search {
+            flex-direction: column;
+        }
+
+        .exchange-hero h1 {
+            font-size: 27px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<header class="site-header">
+    <h2>♻️ ReUseLoop</h2>
+
+```
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="browse.html">Browse Items</a>
+    <a href="../add-item.html">List an Item</a>
+    <a href="exchange.html">Exchange</a>
+    <a href="donations.html">Donations</a>
+</nav>
+```
+
+</header>
+
+<main class="exchange-page">
+
+```
+<section class="exchange-hero">
+    <h1>🔄 Exchange Instead of Buying</h1>
+
+    <p>
+        Have something you no longer need?
+        Find something useful and exchange items with your community.
+        Save money and help reduce waste!
+    </p>
+
+    <form id="exchange-search-form" class="exchange-search">
+        <input
+            type="search"
+            id="exchange-search-input"
+            placeholder="Search items..."
+            aria-label="Search exchange items"
+        >
+
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<section>
+    <h2 class="exchange-section-title">Available for Exchange</h2>
+
+    <p id="exchange-message" role="status">
+        Loading exchange items...
+    </p>
+
+    <div id="exchange-items-container" class="exchange-grid"></div>
+</section>
+
+<section>
+    <h2 class="exchange-section-title">How It Works</h2>
+
+    <div class="exchange-grid">
+        <article class="exchange-card">
+            <h3>1. List Your Item</h3>
+            <p>
+                Add an item you no longer need and select Exchange
+                as the listing type.
+            </p>
+            <a href="../add-item.html" class="exchange-button">
+                List an Item
+            </a>
+        </article>
+
+        <article class="exchange-card">
+            <h3>2. Find an Item</h3>
+            <p>
+                Browse available exchange listings and find something
+                useful for yourself.
+            </p>
+        </article>
+
+        <article class="exchange-card">
+            <h3>3. Arrange an Exchange</h3>
+            <p>
+                Contact the item's owner to discuss the items and
+                arrange a safe, mutually agreed handover.
+            </p>
+        </article>
+    </div>
+</section>
+```
+
+</main>
+
+<script src="../js/exchange.js"></script>
+
+</body>
+</html>

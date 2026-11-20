@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Messages | ReUseLoop</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .messages-page {
+            max-width: 1200px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .messages-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            height: 650px;
+            margin-top: 25px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+        }
+
+        .conversation-panel {
+            border-right: 1px solid #e5e7eb;
+            overflow-y: auto;
+        }
+
+        .conversation-panel h2 {
+            padding: 20px;
+            margin: 0;
+        }
+
+        .conversation-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-top: 1px solid #eee;
+            background: white;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .conversation-item:hover,
+        .conversation-item.active {
+            background: #eaf7ee;
+        }
+
+        .conversation-avatar {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #d7f0df;
+            color: #176b45;
+            font-weight: bold;
+        }
+
+        .conversation-info {
+            min-width: 0;
+        }
+
+        .conversation-info strong,
+        .conversation-info span,
+        .conversation-info small {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .conversation-info span,
+        .conversation-info small {
+            margin-top: 4px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chat-header h2 {
+            margin: 0;
+            font-size: 19px;
+        }
+
+        .chat-header p {
+            margin: 5px 0 0;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .item-info-button {
+            background: #e8f5ed;
+            color: #176b45;
+            border: 1px solid #b9dfc5;
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8faf9;
+        }
+
+        .chat-bubble {
+            width: fit-content;
+            max-width: 75%;
+            padding: 12px 15px;
+            margin-bottom: 14px;
+            border-radius: 13px;
+            overflow-wrap: anywhere;
+            line-height: 1.5;
+        }
+
+        .received {
+            background: white;
+            border: 1px solid #eee;
+        }
+
+        .sent {
+            margin-left: auto;
+            background: #d9f5df;
+        }
+
+        .chat-time {
+            display: block;
+            margin-top: 5px;
+            font-size: 11px;
+            color: #777;
+        }
+
+        .message-form {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .message-form input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .message-form button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #218838;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* ITEM INFORMATION POPUP */
+
+        .enquiry-popup {
+            width: min(460px, calc(100% - 30px));
+            border: none;
+            border-radius: 18px;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,.25);
+        }
+
+        .enquiry-popup::backdrop {
+            background: rgba(0,0,0,.55);
+            backdrop-filter: blur(3px);
+        }
+
+        .enquiry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px;
+            background: #176b45;
+            color: white;
+        }
+
+        .enquiry-header h2 {
+            margin: 0;
+            font-size: 21px;
+        }
+
+        .enquiry-close {
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .enquiry-details {
+            padding: 22px;
+        }
+
+        .enquiry-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .enquiry-row strong {
+            color: #555;
+        }
+
+        .enquiry-row span {
+            text-align: right;
+            overflow-wrap: anywhere;
+            color: #176b45;
+            font-weight: 600;
+        }
+
+        .enquiry-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 22px 22px;
+        }
+
+        .enquiry-actions button {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        #send-enquiry {
+            background: #176b45;
+            color: white;
+        }
+
+        #copy-seller-email {
+            background: #e8f5ed;
+            color: #176b45;
+        }
+
+        #enquiry-status {
+            padding: 0 22px 15px;
+            color: #176b45;
+            font-size: 13px;
+        }
+
+        .chat-empty {
+            text-align: center;
+            padding: 35px 15px;
+            color: #777;
+        }
+
+        @media(max-width:700px) {
+            .messages-layout {
+                grid-template-columns: 1fr;
+                height: 750px;
+            }
+
+            .conversation-panel {
+                max-height: 190px;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            .chat-bubble {
+                max-width: 90%;
+            }
+
+            .chat-header {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header id="site-header"></header>
+
+<main class="messages-page">
+
+    <h1>Messages 💬</h1>
+    <p>Connect with buyers and sellers in the ReUseLoop community.</p>
+
+    <section class="messages-layout">
+
+        <aside class="conversation-panel">
+
+            <h2>Conversations</h2>
+
+            <div id="conversation-list">
+                <p class="chat-empty">Loading conversations...</p>
+            </div>
+
+        </aside>
+
+        <section class="chat-panel">
+
+            <header class="chat-header">
+
+                <div>
+                    <h2 id="chat-name">Select a conversation</h2>
+                    <p id="chat-status">ReUseLoop Community</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="item-info-button"
+                    id="open-item-info"
+                    disabled>
+                    View Item ℹ️
+                </button>
+
+            </header>
+
+            <div
+                class="chat-messages"
+                id="chat-messages"
+                aria-live="polite">
+
+                <p>Select a conversation to view messages.</p>
+
+            </div>
+
+            <form id="message-form" class="message-form">
+
+                <input
+                    type="text"
+                    id="message-input"
+                    placeholder="Type a message..."
+                    maxlength="1000"
+                    autocomplete="off"
+                    required>
+
+                <button type="submit">Send</button>
+
+            </form>
+
+        </section>
+
+    </section>
+
+</main>
+
+<!-- ITEM DETAILS POPUP -->
+
+<dialog id="item-enquiry-popup" class="enquiry-popup">
+
+    <div class="enquiry-header">
+
+        <h2>📦 Item Enquiry Details</h2>
+
+        <button
+            type="button"
+            id="close-enquiry-popup"
+            class="enquiry-close">
+            &times;
+        </button>
+
+    </div>
+
+    <div class="enquiry-details">
+
+        <div class="enquiry-row">
+            <strong>Item</strong>
+            <span id="enquiry-item-name">Loading...</span>
+        </div>
+
+        <div class="enquiry-row">
+            <strong>Price</strong>
+            <span id="enquiry-price">Loading...</span>
+        </div>
+
+        <div class="enquiry-row">
+            <strong>Location</strong>
+            <span id="enquiry-location">Loading...</span>
+        </div>
+
+        <div class="enquiry-row">
+            <strong>Seller Email</strong>
+            <span id="enquiry-email">Loading...</span>
+        </div>
+
+        <div class="enquiry-row">
+            <strong>Item ID</strong>
+            <span id="enquiry-item-id">Loading...</span>
+        </div>
+
+    </div>
+
+    <div class="enquiry-actions">
+
+        <button type="button" id="send-enquiry">
+            Send Enquiry ✉️
+        </button>
+
+        <button type="button" id="copy-seller-email">
+            Copy Email
+        </button>
+
+    </div>
+
+    <p id="enquiry-status" aria-live="polite"></p>
+
+</dialog>
+
+<script src="../js/navigation.js"></script>
+<script src="../js/messages.js"></script>
+
+</body>
+</html>
