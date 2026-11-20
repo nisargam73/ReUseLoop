@@ -278,11 +278,28 @@ form.addEventListener("submit", async function (event) {
 
         if (!createResponse.ok) {
 
-            throw new Error(
-                createResult.detail ||
-                "Could not create the item."
-            );
-        }
+    let errorMessage = "Could not create the item.";
+
+    if (Array.isArray(createResult.detail)) {
+
+        errorMessage = createResult.detail
+            .map(err =>
+                `${(err.loc || []).join(".")}: ${err.msg}`
+            )
+            .join("; ");
+
+    } else if (typeof createResult.detail === "object"
+               && createResult.detail !== null) {
+
+        errorMessage = JSON.stringify(createResult.detail);
+
+    } else if (createResult.detail) {
+
+        errorMessage = createResult.detail;
+    }
+
+    throw new Error(errorMessage);
+}
 
 
         const itemId = createResult.item_id;
